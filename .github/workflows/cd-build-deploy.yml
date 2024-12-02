@@ -28,13 +28,12 @@ jobs:
       - name: Deploy Documentation to GitHub Pages
         run: |
           mvn site -f AwesomePasswordChecker/pom.xml
-        # mvn deploy:site
 
-      - name: Generate Cobertura Report
-        run: mvn cobertura:cobertura -f AwesomePasswordChecker/pom.xml
+      - name: Run JaCoCo Code Coverage
+        run: mvn -f AwesomePasswordChecker/pom.xml clean package jacoco:report
 
-      - name: Deploy Cobertura Report to GitHub Pages
+      - name: Deploy JaCoCo Report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: target/site/cobertura-report  # Path to the Cobertura report directory
+          publish_dir: AwesomePasswordChecker/target/site/jacoco-report  # Path to the JaCoCo report directory
