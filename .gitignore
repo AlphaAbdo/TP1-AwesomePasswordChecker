@@ -48,7 +48,6 @@ Thumbs.db
 *.ear
 *.class
 *.log
-*.csv
 
 # Ignore Maven POM dependency version history
 *.pom
