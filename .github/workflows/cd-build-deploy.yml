@@ -28,9 +28,13 @@ jobs:
       - name: Deploy Documentation to GitHub Pages
         run: |
           mvn site
-          mvn deploy:site
+        # mvn deploy:site
+
+      - name: Generate Cobertura Report
+        run: mvn cobertura:cobertura
 
       - name: Deploy Cobertura Report to GitHub Pages
-        run: |
-          mvn cobertura:cobertura
-          mvn site:deploy -DsiteUrl=https://your-username.github.io/repository-name/cobertura/${{ github.run_number }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: target/site/cobertura-report  # Path to the Cobertura report directory
