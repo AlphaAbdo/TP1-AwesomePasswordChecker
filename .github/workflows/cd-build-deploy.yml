@@ -1,0 +1,32 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+
+      - name: Build and Deploy to GitHub Maven Registry
+        run: |
+          mvn clean deploy -P release
+
+      - name: Deploy Documentation to GitHub Pages
+        run: |
+          mvn site
+          mvn deploy:site
+
+      - name: Deploy Cobertura Report to GitHub Pages
+        run: |
+          mvn cobertura:cobertura
+          mvn site:deploy -DsiteUrl=https://your-username.github.io/repository-name/cobertura/${{ github.run_number }}
