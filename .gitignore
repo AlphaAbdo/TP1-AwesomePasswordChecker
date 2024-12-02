@@ -1,5 +1,5 @@
 # Ignore Maven target directory
-/target/
+/target/*
 
 # Ignore VSCode specific files
 .vscode/
