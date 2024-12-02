@@ -27,11 +27,11 @@ jobs:
 
       - name: Deploy Documentation to GitHub Pages
         run: |
-          mvn site
+          mvn site -f AwesomePasswordChecker/pom.xml
         # mvn deploy:site
 
       - name: Generate Cobertura Report
-        run: mvn cobertura:cobertura
+        run: mvn cobertura:cobertura -f AwesomePasswordChecker/pom.xml
 
       - name: Deploy Cobertura Report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
