@@ -18,9 +18,9 @@ jobs:
           java-version: 17
           distribution: 'adopt'
 
-      - name: Build and Deploy to GitHub Maven Registry
-        run: |
-          mvn clean deploy -P release
+      # - name: Build and Deploy to GitHub Maven Registry
+      #   run: |
+      #     mvn clean deploy -P release
 
       - name: Deploy Documentation to GitHub Pages
         run: |
